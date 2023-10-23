@@ -27,7 +27,7 @@ Env.read_env()
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG',False)
+DEBUG = env.bool('DEBUG',default=False)
 
 ALLOWED_HOSTS = tuple(env.list('ALLOWED_HOSTS',default=[]))
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "graphene_django",
+    "core",
     "empa_auth"
 ]
 
@@ -92,9 +93,11 @@ DATABASES = {
 
 #Graphene config
 GRAPHENE = {
-    "SCHEMA": "django_root.schema.schema"
+    "SCHEMA": "empabee_back.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -114,6 +117,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+AUTH_USER_MODEL = 'empa_auth.Persona'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

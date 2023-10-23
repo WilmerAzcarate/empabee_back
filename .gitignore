@@ -4,5 +4,7 @@
 
 #CACHE
 /empabee_back/__pycache__
+/core/__pycache__
+/core/migrations/__pycache__
 /empa_auth/__pycache__
 /empa_auth/migrations/__pycache__
