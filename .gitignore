@@ -1,0 +1,8 @@
+#ENTORNO DE DESARROLLO
+/.venv
+/empabee_back/.env
+
+#CACHE
+/empabee_back/__pycache__
+/empa_auth/__pycache__
+/empa_auth/migrations/__pycache__
