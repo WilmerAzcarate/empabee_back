@@ -1,13 +1,4 @@
-import graphene
-from graphene_django import DjangoObjectType
-
-from .models import *
-
-class PaisType(DjangoObjectType):
-    class Meta:
-        model = Pais
-        departamentos = graphene.Field(graphene.List('path.to.Departamentos'))
-        fields = ("__all__")
+from .types import *
         
 class traerPaises(graphene.ObjectType):
     paises = graphene.List(PaisType)
@@ -15,3 +6,17 @@ class traerPaises(graphene.ObjectType):
     def resolve(self,info):
         paises = Pais.objects.all()
         return traerPaises(paises=paises)
+    
+class traerDepartamentos(graphene.ObjectType):
+    departamentos = graphene.List(DepartamentoType)
+    
+    def resolve(self,info):
+        departamentos = Departamento.objects.all()
+        return traerDepartamentos(departamentos=departamentos)
+    
+class traerCiudades(graphene.ObjectType):
+    ciudades = graphene.List(CiudadType)
+    
+    def resolve(self,info):
+        ciudades = Ciudad.objects.all()
+        return traerCiudades(ciudades=ciudades)

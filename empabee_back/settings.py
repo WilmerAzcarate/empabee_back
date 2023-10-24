@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from datetime import timedelta
 from environ import Env
 from pathlib import Path
 
@@ -121,6 +122,14 @@ AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+GRAPHQL_JWT = {
+    'JWT_ALLOW_ARGUMENT': env.bool('JWT_ALLOW_ARGUMENT'),
+    "JWT_VERIFY_EXPIRATION": env.bool('JWT_VERIFY_EXPIRATION'),
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": env.bool('JWT_LONG_RUNNING_REFRESH_TOKEN'),
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=env.int('JWT_EXPIRATION_DELTA')),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=env.int('JWT_REFRESH_EXPIRATION_DELTA')),
+}
 
 AUTH_USER_MODEL = 'empa_auth.Persona'
 
