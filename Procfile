@@ -1,1 +1,1 @@
-web: gunicorn icard.wsgi --log-file -
+web: gunicorn empabee_back.wsgi --log-file -
