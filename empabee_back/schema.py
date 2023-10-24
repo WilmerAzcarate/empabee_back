@@ -2,10 +2,9 @@ import graphene
 import graphql_jwt
 from django.views.decorators.csrf import csrf_exempt
 from graphql_jwt.decorators import login_required
-from empa_auth.models import Persona
 
-from core.schema import *
-from empa_auth.schema import *
+from core.types import *
+from empa_auth.types import *
 
 class Query(graphene.ObjectType):
     paises = graphene.List(PaisType)
